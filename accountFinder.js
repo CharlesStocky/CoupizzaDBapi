@@ -1,7 +1,6 @@
 const graph = require('fbgraph'); 
 const MongoClient = require('mongodb').MongoClient; 
 
-//graph.setAccessToken(node.env.FB_AT)
 
 graph.setAccessToken(process.env.FB_UAT) 
 let counter = 0

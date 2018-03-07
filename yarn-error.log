@@ -2,7 +2,7 @@ Arguments:
   /usr/local/Cellar/node/9.7.1/bin/node /usr/local/Cellar/yarn/1.5.1/libexec/bin/yarn.js startFB
 
 PATH: 
-  /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
+  /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Applications/Wireshark.app/Contents/MacOS
 
 Yarn version: 
   1.5.1
@@ -32,6 +32,7 @@ npm manifest:
       "express": "^4.16.2",
       "fbgraph": "^1.4.1",
       "mongodb": "^3.0.3",
+      "simple-rate-limiter": "^0.2.3",
       "twitter": "^1.7.1"
     },
     "scripts": {
@@ -1917,6 +1918,10 @@ Lockfile:
   signal-exit@^3.0.0:
     version "3.0.2"
     resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
+  
+  simple-rate-limiter@^0.2.3:
+    version "0.2.3"
+    resolved "https://registry.yarnpkg.com/simple-rate-limiter/-/simple-rate-limiter-0.2.3.tgz#306466faff17e1f22ee758b0a37cd453e8351b41"
   
   slash@^1.0.0:
     version "1.0.0"

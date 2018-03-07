@@ -16,6 +16,7 @@
     "express": "^4.16.2",
     "fbgraph": "^1.4.1",
     "mongodb": "^3.0.3",
+    "simple-rate-limiter": "^0.2.3",
     "twitter": "^1.7.1"
   },
   "scripts": {

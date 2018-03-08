@@ -1,36 +1,7 @@
-const graph = require('fbgraph');
-const MongoClient = require('mongodb').MongoClient;
-let IDs = [];
+import graph from 'fbgraph';
+import { MongoClient } from 'mongodb'; 
 
 graph.setAccessToken(process.env.FB_UAT)
-
-let d = new Date;
-
-let currentMonth = d.getMonth() + 1 ;
-let currentDate = d.getDate();
-let currentYear = d.getFullYear();
-let currentDateObj = {
-  month: currentMonth,
-  day: currentDate,
-  year: currentYear
-}
-
-let dayAgoDateObj = {
-  month: currentMonth, 
-  day: currentDate - 1,
-  year: currentYear
-}
-
-let dateFormatter = (object) => { //formats date to match the formatting of facebook dates
-  if(object.month < 10){ 
-    object.month = '0' + object.month;
-  }
-  if(object.day < 10){ 
-    object.day = '0' + object.day;
-  }
-  let formattedDate = object.year + '-' + object.month + '-' + object.day  
-  return formattedDate
-}
 
 let promoArr = []
 let currentDateStr = dateFormatter(currentDateObj)

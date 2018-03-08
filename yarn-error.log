@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/Cellar/node/9.7.1/bin/node /usr/local/Cellar/yarn/1.5.1/libexec/bin/yarn.js startFB
+  /usr/local/Cellar/node/9.7.1/bin/node /usr/local/Cellar/yarn/1.5.1/libexec/bin/yarn.js findCodes
 
 PATH: 
   /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Applications/Wireshark.app/Contents/MacOS
@@ -33,10 +33,12 @@ npm manifest:
       "fbgraph": "^1.4.1",
       "mongodb": "^3.0.3",
       "simple-rate-limiter": "^0.2.3",
-      "twitter": "^1.7.1"
+      "twitter": "^1.7.1",
+      "underscore": "^1.8.3"
     },
     "scripts": {
-      "startFB": "babel-node FBDataGen/accountFinder/app.js"
+      "findFBAccounts": "babel-node FBDataGen/accountFinder/app.js",
+      "findCodes": "babel-node FBDataGen/codeFinder/app.js"
     }
   }
 
@@ -2066,6 +2068,10 @@ Lockfile:
     version "0.0.6"
     resolved "https://registry.yarnpkg.com/uid-number/-/uid-number-0.0.6.tgz#0ea10e8035e8eb5b8e4449f06da1c730663baa81"
   
+  underscore@^1.8.3:
+    version "1.8.3"
+    resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.8.3.tgz#4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022"
+  
   unpipe@1.0.0, unpipe@~1.0.0:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/unpipe/-/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"
@@ -2118,7 +2124,7 @@ Trace:
   Error: Command failed.
   Exit code: 1
   Command: sh
-  Arguments: -c babel-node FBDataGen/accountFinder/app.js
+  Arguments: -c babel-node FBDataGen/codeFinder/app.js
   Directory: /Users/charlesstocky/Desktop/coupizzaDBApi
   Output:
   

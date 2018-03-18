@@ -5,20 +5,27 @@ import _ from 'underscore'
 graph.setAccessToken(process.env.FB_UAT)
 
 const dateStr = dateFormatter()
+console.log(dateStr)
 
 export default (FBAccountObj) => {
   return new Promise((resolve, reject)=>{
+    let postArr = []
+    let counter = 0
     FBAccountObj.forEach((obj)=>{
-      graph.get('/' + obj.ID + '/feed', (res, err) =>{
-        if(err)return console.log(err)
-        console.log(res)
-        let currentPosts = _.filter(res, (postObj)=>{
-          if(postObj.createdTime.slice(0, 9) === dateStr){
-            return true 
+      counter++
+      graph.get(obj.ID + '/feed', (err, res) =>{
+        if(err) return
+        if(!res.data || res.data.length === 0) return
+        res.data.forEach((post) =>{
+          if(post.created_time.includes(dateStr)){
+            postArr.push(post)
           }
-        }) 
-        resolve(console.log(currentPosts))
-      })  
+        })
+        if(counter === FBAccountObj.length){
+          console.log('Exhausted facebook accounts')
+          resolve(postArr) 
+        }
+      })
     })
   })
 }

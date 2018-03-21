@@ -22,6 +22,7 @@
   },
   "scripts": {
     "findFBAccounts": "babel-node FBDataGen/accountFinder/app.js",
-    "findCodes": "babel-node FBDataGen/codeFinder/app.js"
+    "findFBCodes": "babel-node FBDataGen/codeFinder/app.js",
+    "findTWAccounts": "babel-node TWDataGen/accountFinder/app.js"
   }
 }

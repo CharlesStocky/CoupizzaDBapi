@@ -7,6 +7,7 @@ import accountGetter from './accountGetter.js'
   const fbObjArray = await accountGetter()
 
   return await MongoClient.connect('mongodb://localhost:27017', (err, client)=>{
+    if(err)return console.log(err)
     const db = client.db('papa')
     const collection = db.collection('FBAccounts')
     fbObjArray.forEach((obj)=>{

@@ -3,7 +3,7 @@ import { MongoClient } from 'mongodb';
 
 const endpoint = '/34703237638/locations?fields=location&after=' //this api endpoint retrieves all locations of a specified business
 
-graph.setAccessToken(process.env.fbAT)
+graph.setAccessToken(process.env.FB_UAT)
 
 export default () => {
   return new Promise((resolve, reject)=>{

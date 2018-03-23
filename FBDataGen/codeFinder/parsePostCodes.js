@@ -1,9 +1,10 @@
 
 export default (posts) =>{
   return new Promise((res)=>{
+    console.log("PARSING CODES FROM POSTS")
     posts.forEach((post)=>{
       if(post.message){
-      console.log(post.message)
+        console.log(post.message)
         if(post.message.toLowerCase().match(/code/)){
           let indxOfCodeStart = post.message.toLowerCase().indexOf('code')
           let promoSlice = post.message.slice(indxOfCodeStart + 4)

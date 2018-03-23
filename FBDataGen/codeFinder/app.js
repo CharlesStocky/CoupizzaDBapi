@@ -7,9 +7,10 @@ import codeParser from './parsePostCodes.js'
 
 (async() =>{
   const accounts = await fbAccounts() 
-  const posts = await postGetter(accounts)
+  const posts = await postGetter(accounts) 
   const codes = await codeParser(posts)
-  return MongoClient.connect('mongodb://localhost:27017', (err, client)=>{
+  return console.log(codes)
+  /*MongoClient.connect('mongodb://localhost:27017', (err, client)=>{
     if(err) return console.log(err)
     const db = client.db('papa')
     const collection = db.collection('codes')
@@ -19,5 +20,5 @@ import codeParser from './parsePostCodes.js'
         console.log(res)
       })
     })
-  })
+  })*/
 })()

@@ -14,8 +14,8 @@ export default (FBAccountObj) => {
       graph.get(obj.ID + '/feed', (err, res) =>{
         counter++
         console.log(counter)
+        if(err && counter === FBAccountObj.length) console.log(err, "ID list exhausted"), resolve(postArr) 
         if(err) return console.log(err) 
-        if(err && counter === FBAccountObj.length) conole.log(';lakjs;ldfkj;lskjf;alllj'), resolve(postArr) 
         if(!res.data) return console.log(res)
         res.data.forEach((post) =>{
           if(post.created_time.includes(dateStr)){
@@ -24,10 +24,10 @@ export default (FBAccountObj) => {
           }
         })
       })
+      if(counter === FBAccountObj.length){
+        console.log('ID list exhausted') 
+        resolve(postArr)
+      }
     })
-    if(counter === FBAccountObj.length){
-      console.log('ID list exhausted') 
-      resolve(postArr)
-    }
   })
 }

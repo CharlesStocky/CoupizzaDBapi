@@ -1,13 +1,15 @@
+import '_' from 'lodash'
 
 export default (posts) =>{
-  let codes = []
-  posts.forEach((post)=>{
   return new Promise((res)=>{
+    const codes = []
+    posts.forEach((post)=>{
     //console.log("PARSING CODES FROM POSTS")
-      if(post.post.message){
-        if(post.post.message.toLowerCase().match(/code/)){
-          let indxOfCodeStart = post.post.message.toLowerCase().indexOf('code')
-          let promoSlice = post.post.message.slice(indxOfCodeStart + 4)
+      if(post.message){
+        if(post.message.toLowerCase().match(/code/)){
+          console.log(post)
+          let indxOfCodeStart = post.message.toLowerCase().indexOf('code')
+          let promoSlice = post.message.slice(indxOfCodeStart + 4)
           if(promoSlice.match(/[A-Z\d]{3,}/)){
             let promoCode = promoSlice.match(/[A-Z\d]{3,}/)[0]
             if(promoCode === ''){
@@ -15,14 +17,16 @@ export default (posts) =>{
             }
             let promoObj = {
               promoCode: promoCode, 
-              promoLocation: locale
+              promoLocation: post.location, 
+              createdAt: post.createdAt
             }
             codes.push(promoObj)
           }else{
-            let promoCode = post.message.slice(indxOfCodeStart + 5) //if the code isn't capitalized, match whatever comes after the string "code"
+            let promoCode = post.message.slice(indxOfCodeStart + 5) //if the code doesn't contain capitalized letters, match whatever comes after the string "code"
             let promoObj= {
               promoCode: promoCode,
-              promoLocation: locale
+              promoLocation: post.location, 
+              createdAt: post.createdAt
             }
             codes.push(promoObj)
           }
@@ -36,7 +40,8 @@ export default (posts) =>{
             }
             let promoObj = {
               promoCode: promoCode,	
-              promoLocation: locale
+              promoLocation: post.location, 
+              createdAt: post.createdAt
             }
             codes.push(promoObj)
           }else{
@@ -44,10 +49,9 @@ export default (posts) =>{
           }
         }
       }else{
-        console.log('no code found') 
+        console.log('no codes found') 
       }
     })
+    res(codes)
   }) 
-  console.log(codes)
-  resolve(codes)
 }

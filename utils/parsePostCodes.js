@@ -1,4 +1,4 @@
-import '_' from 'lodash'
+import _ from 'underscore'
 
 export default (posts) =>{
   return new Promise((res)=>{
@@ -7,7 +7,6 @@ export default (posts) =>{
     //console.log("PARSING CODES FROM POSTS")
       if(post.message){
         if(post.message.toLowerCase().match(/code/)){
-          console.log(post)
           let indxOfCodeStart = post.message.toLowerCase().indexOf('code')
           let promoSlice = post.message.slice(indxOfCodeStart + 4)
           if(promoSlice.match(/[A-Z\d]{3,}/)){
@@ -17,16 +16,14 @@ export default (posts) =>{
             }
             let promoObj = {
               promoCode: promoCode, 
-              promoLocation: post.location, 
-              createdAt: post.createdAt
+              promoLocation: post.location
             }
             codes.push(promoObj)
           }else{
             let promoCode = post.message.slice(indxOfCodeStart + 5) //if the code doesn't contain capitalized letters, match whatever comes after the string "code"
             let promoObj= {
               promoCode: promoCode,
-              promoLocation: post.location, 
-              createdAt: post.createdAt
+              promoLocation: post.location
             }
             codes.push(promoObj)
           }
@@ -40,8 +37,7 @@ export default (posts) =>{
             }
             let promoObj = {
               promoCode: promoCode,	
-              promoLocation: post.location, 
-              createdAt: post.createdAt
+              promoLocation: post.location
             }
             codes.push(promoObj)
           }else{
@@ -49,7 +45,7 @@ export default (posts) =>{
           }
         }
       }else{
-        console.log('no codes found') 
+        console.log('no code found') 
       }
     })
     res(codes)

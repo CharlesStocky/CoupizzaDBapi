@@ -19,7 +19,8 @@ export default (FBAccountObj) => {
         if(!res.data) return console.log(res)
         res.data.forEach((post) =>{
           if(post.created_time.includes(dateStr)){
-            const postAndLocation = Object.assign(post, {location: obj.city + ", " + obj.state + " " + obj.zip, createdAt: post.created_time}) //added created time to readd codes posted on date after the first code 
+            const location = {location: obj.city + ", " + obj.state + " " + obj.zip}
+            const postAndLocation = {post, ...location} //added created time to readd codes posted on date after the first code 
             postArr.push(postAndLocation)
           }
         })

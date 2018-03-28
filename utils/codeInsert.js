@@ -2,7 +2,6 @@ import { MongoClient } from 'mongodb';
 
 export default (codes) => {
   return MongoClient.connect('mongodb://localhost:27017', (err, client)=>{
-    console.log('called inside connect')
     if(err) return console.log(err)
     if(codes.length === 0) return console.log('no codes found')
     const db = client.db('papa')

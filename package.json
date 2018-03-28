@@ -18,8 +18,7 @@
     "mongodb": "^3.0.3",
     "simple-rate-limiter": "^0.2.3",
     "twitter": "^1.7.1",
-    "underscore": "^1.8.3",
-    "webpack": "^4.3.0"
+    "underscore": "^1.8.3"
   },
   "scripts": {
     "findFBAccounts": "babel-node FBDataGen/accountFinder/app.js",

@@ -8,6 +8,7 @@ const blah = () => {
 
 (()=>{
   setTimeout(async()=>{
-    return blah();  
+    await blah();  
+    return console.log(';lkas;dlfkj')
   }, 300)
 })()

@@ -1,6 +1,6 @@
-import { MongoClient } from 'mongodb'
+var MongoClient = require('mongodb').MongoClient
 
-export default (dbCollection, ObjArray, callback) =>{
+const accountsInsert = (dbCollection, ObjArray, callback) =>{
   return MongoClient.connect('mongodb://localhost:27017', (err, client)=>{
     if(err)return console.log(err)
     const db = client.db('papa')
@@ -23,3 +23,4 @@ export default (dbCollection, ObjArray, callback) =>{
   })
 }
 
+module.exports = accountsInsert

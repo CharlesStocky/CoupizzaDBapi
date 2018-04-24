@@ -1,5 +1,6 @@
 const Twitter = require('twitter');
 const accountsInsert = require('../../utils/accountInsert.js');
+const exit = require('../exit.js')
 
 const TWClient = new Twitter({
   consumer_key: process.env.consumer_key,
@@ -9,22 +10,23 @@ const TWClient = new Twitter({
 });
 
 (()=>{
-  let nextCursor = process.env.nextCursor; 
   let accounts = [];
-  TWClient.get('followers/list', {user_id: '18450106', cursor: nextCursor}, function callback(err, res){
+  let nextCursor = -2
+  TWClient.get('followers/list', {user_id: '18450106', cursor: process.env.nextCursor}, function callback(err, res){
 
-    console.log(res);
     if(err){ 
       if(err[0].code === 88){
         console.log('setting timeout')
+
         setTimeout(async()=>{
-          await accountInsert(accounts) 
-          return TWClient.get('followers/list', {user_id: '18450106', cursor: process.env.nextCursor}, callback)
+          await accountInsert('TWAccounts', accounts);
+          return TWClient.get('followers/list', {user_id: '18450106', cursor: nextCursor}, callback);
         }, 900000) 
-      };
-      return console.log(err);
+      }
     };
+
     if(!res.users) return console.log(res);
+    nextCursor = res.next_cursor;
 
     res.users.forEach((user)=>{
       if(user.screen_name.includes('PapaJohns')){
@@ -32,6 +34,7 @@ const TWClient = new Twitter({
         accounts.push(user);
       }
     })
+
     if(res.next_cursor !== 0){
       TWClient.get('followers/list', {user_id: '18450106', cursor: nextCursor}, callback);
     }

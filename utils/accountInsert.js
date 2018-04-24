@@ -1,6 +1,6 @@
 var MongoClient = require('mongodb').MongoClient
 
-const accountsInsert = (dbCollection, ObjArray, callback) =>{
+const accountsInsert = (dbCollection, ObjArray) =>{
   return MongoClient.connect('mongodb://localhost:27017', (err, client)=>{
     if(err)return console.log(err)
     const db = client.db('papa')
@@ -11,9 +11,6 @@ const accountsInsert = (dbCollection, ObjArray, callback) =>{
         if(docs.length === 0){
           collection.insert({"ID": obj.id, "zip": obj.location.zip, "city": obj.location.city}, (err, res)=>{
             if(err) return console.log(err)
-            if(callback){
-              callback(...params) 
-            }
             return console.log(res.insertCount + ' account(s) inserted') 
           }); 
         }

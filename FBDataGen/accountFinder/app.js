@@ -1,8 +1,10 @@
-import graph from 'fbgraph'; 
-import { MongoClient } from 'mongodb';  
+var graph = require('fbgraph'); 
+var MongoClient = require('mongodb').MongoClient;
 
-import accountGetter from './accountGetter.js'
-import accountInsert from '../../utils/accountInsert.js'
+var accountGetter = require('./accountGetter.js');
+var accountInsert = require('../../utils/accountInsert.js');
+
+console.log(process.env.FBAT);
 
 (async () => {
   const fbObjArray = await accountGetter()

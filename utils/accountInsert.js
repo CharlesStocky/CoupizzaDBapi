@@ -10,13 +10,13 @@ const accountsInsert = (dbCollection, ObjArray) =>{
         if(err) return console.log(err)
         if(docs.length === 0){
           collection.insert({"ID": obj.id, "zip": obj.location.zip, "city": obj.location.city}, (err, res)=>{
+            client.close()
             if(err) return console.log(err)
             return console.log(res.insertCount + ' account(s) inserted') 
           }); 
         }
       })
     })
-    db.close()
   })
 }
 

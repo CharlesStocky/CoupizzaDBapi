@@ -1,18 +1,21 @@
+require('dotenv').config()
 const Twitter = require('twitter');
 const accountsInsert = require('../../utils/accountInsert.js');
-const exit = require('../exit.js')
+//const = require('../cursorFile.js');
+
+console.log(process.env.TWAT);
 
 const TWClient = new Twitter({
-  consumer_key: process.env.consumer_key,
-  consumer_secret: process.env.consumer_secret,
-  access_token_key: process.env.access_token,
-  access_token_secret: process.env.access_token_secret
+  consumer_key: process.env.TWCK,
+  consumer_secret: process.env.TWCS,
+  access_token_key: process.env.TWAT,
+  access_token_secret: process.env.TWATS
 });
+
 
 (()=>{
   let accounts = [];
-  let nextCursor = -2
-  TWClient.get('followers/list', {user_id: '18450106', cursor: process.env.nextCursor}, function callback(err, res){
+  TWClient.get('followers/list', {user_id: '18450106', cursor: process.env.TWCURSOR}, function callback(err, res){
 
     if(err){ 
       if(err[0].code === 88){
@@ -20,7 +23,7 @@ const TWClient = new Twitter({
 
         setTimeout(async()=>{
           await accountInsert('TWAccounts', accounts);
-          return TWClient.get('followers/list', {user_id: '18450106', cursor: nextCursor}, callback);
+          return res.next_cursor;
         }, 900000) 
       }
     };

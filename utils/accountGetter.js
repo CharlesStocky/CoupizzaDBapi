@@ -6,6 +6,7 @@ export default (accountCollection) =>{
     const db = client.db('papa')
     const collection = db.collection(accountCollection)
     collection.find({}).toArray((err, docs)=>{
+      client.close()
       if(err)return console.log(err)
       return docs
     })

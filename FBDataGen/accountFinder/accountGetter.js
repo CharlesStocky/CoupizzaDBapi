@@ -1,11 +1,11 @@
-import graph from 'fbgraph';
-import { MongoClient } from 'mongodb';
+var graph = require('fbgraph');
+var MongoClient = require('mongodb').MongoClient;
 
 const endpoint = '/34703237638/locations?fields=location&after=' //this api endpoint retrieves all locations of a specified business
 
 graph.setAccessToken(process.env.FB_UAT)
 
-export default () => {
+const accountFinder = () => {
   return new Promise((resolve, reject)=>{
     let dataArr = []
     graph.get(endpoint, function dataParse(err, res){
@@ -23,3 +23,5 @@ export default () => {
     })
   })
 }
+
+module.exports = accountFinder;

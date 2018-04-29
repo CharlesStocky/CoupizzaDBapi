@@ -1,9 +1,7 @@
-require('dotenv').config()
+require('dotenv').config({path: '../../.env'})
 const Twitter = require('twitter');
 const accountsInsert = require('../../utils/accountInsert.js');
-//const = require('../cursorFile.js');
-
-console.log(process.env.TWAT);
+const writeCursorToFile = require('./writeCursorToFile.js');
 
 const TWClient = new Twitter({
   consumer_key: process.env.TWCK,
@@ -15,19 +13,26 @@ const TWClient = new Twitter({
 
 (()=>{
   let accounts = [];
+  let nextCursor
   TWClient.get('followers/list', {user_id: '18450106', cursor: process.env.TWCURSOR}, function callback(err, res){
 
     if(err){ 
       if(err[0].code === 88){
-        console.log('setting timeout')
+        console.log('setting timeout');
+
+        if(nextCursor !== process.env.TWCURSOR && typeof(nextCursor) === "number"){ //allows requests to start from the last cursor after stopping the script 
+          writeCursorToFile(nextCursor); 
+        }
 
         setTimeout(async()=>{
-          await accountInsert('TWAccounts', accounts);
-          return res.next_cursor;
+          if(accounts.length > 0){
+            await accountsInsert(accounts) 
+            accounts = []
+          }
+          return TWClient.get('followers/list', {user_id: '18450106', cursor: nextCursor}, callback)
         }, 900000) 
       }
     };
-
     if(!res.users) return console.log(res);
     nextCursor = res.next_cursor;
 
